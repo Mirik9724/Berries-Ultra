@@ -1,1 +1,1 @@
-rootProject.name = "Berries Ultra"
+rootProject.name = "Berries-Ultra"

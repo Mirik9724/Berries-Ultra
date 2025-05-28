@@ -1,11 +1,12 @@
 plugins {
     kotlin("jvm") version "2.1.0"
-    id("com.gradleup.shadow") version "8.3.0"
+//    id("com.gradleup.shadow") version "8.3.0"
+    id("com.github.johnrengelman.shadow") version "8.1.1"
     id("xyz.jpenilla.run-paper") version "2.3.1"
 }
 
 group = "net.Mirik9724"
-version = "0.0.1"
+version = "0.1.3"
 
 repositories {
     mavenCentral()
@@ -51,4 +52,12 @@ tasks.processResources {
     filesMatching("plugin.yml") {
         expand(props)
     }
+}
+
+tasks{
+withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar> {
+    archiveClassifier.set("") // Убирает "-all" из имени
+    archiveVersion.set(project.version.toString())
+    mergeServiceFiles()
+}
 }
