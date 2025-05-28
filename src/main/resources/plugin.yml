@@ -1,0 +1,8 @@
+name: Berries Ultra
+version: '0.0.1'
+main: net.Mirik9724.berriesUltra.BerriesUltra
+api-version: '1.18'
+authors: [ Mirik9724 ]
+description: Players can plant sweet berries only while sneaking (holding Shift).
+
+folia-supported: true
