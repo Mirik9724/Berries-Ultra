@@ -1,0 +1,81 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.9.22'
+    id 'fabric-loom' version '0.12.10'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+//    id 'xyz.jpenilla.run-paper' version '2.3.1'
+}
+
+group = 'net.Mirik9724'
+version = '0.1.8'
+
+repositories {
+    maven {
+        url = uri('libs')
+    }
+    gradlePluginPortal()
+    mavenCentral()
+    maven {
+        url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
+        name = 'spigotmc-repo'
+    }
+    maven {
+        url = 'https://oss.sonatype.org/content/groups/public/'
+        name = 'sonatype'
+    }
+    maven {
+        url = 'https://maven.fabricmc.net/'
+    }
+}
+
+
+dependencies {
+    // To change the versions see the gradle.properties file
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+    // Fabric API. This is technically optional, but you probably want it anyway.
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    modImplementation "net.fabricmc:fabric-language-kotlin:${project.fabric_kotlin_version}"
+
+    compileOnly 'org.spigotmc:spigot-api:1.18.2-R0.1-SNAPSHOT'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+
+    implementation 'org.slf4j:slf4j-api:2.0.9'
+    runtimeOnly 'org.slf4j:slf4j-jdk14:2.0.9'
+}
+
+//tasks.remove(tasks.named('runServer').get())
+
+//tasks.register('runServerPaper', JavaExec) {
+//    group = 'run'
+//    description = 'Run Minecraft server with custom task'
+//
+//    // Здесь повтори конфигурацию runServer из плагина, например:
+//    // javaLauncher, args, classpath и другие настройки
+//
+//    // Пример с minecraftVersion, если используешь плагин run-paper
+//    minecraftVersion = '1.14'
+//}
+
+kotlin {
+    jvmToolchain(8)
+}
+
+build {
+    dependsOn shadowJar
+}
+
+processResources {
+    inputs.properties version: version
+    filteringCharset = 'UTF-8'
+    filesMatching('plugin.yml') {
+        expand version: version
+    }
+}
+
+tasks.withType(com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar) {
+    archiveClassifier.set('') // Убирает "-all"
+    archiveVersion.set(version.toString())
+    mergeServiceFiles()
+}

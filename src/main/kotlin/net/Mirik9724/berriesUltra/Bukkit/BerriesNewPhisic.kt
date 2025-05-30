@@ -1,4 +1,4 @@
-package net.Mirik9724.berriesUltra
+package net.Mirik9724.berriesUltra.Bukkit
 
 import org.bukkit.Material
 import org.bukkit.event.EventHandler
