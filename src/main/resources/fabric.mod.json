@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "berriesultra",
+  "version": "0.1.8",
+  "name": "Berries Ultra",
+  "description": "Players can plant sweet berries only while sneaking (holding Shift).",
+  "authors": ["Mirik9724"],
+  "license": "Custom",
+  "environment": "*",
+  "entrypoints": {
+    "client": ["net.Mirik9724.berriesUltra.BerriesUltraClient"]
+  },
+  "depends": {
+    "fabricloader": ">=0.12.0",
+    "fabric": "*",
+    "minecraft": ">=1.14",
+    "java": ">=8"
+  }
+}
